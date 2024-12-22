@@ -1,0 +1,43 @@
+﻿@using VisualBasic
+@page "/logs"
+
+<PageTitle>Logs</PageTitle>
+
+<h3>Activity Log (Call Visual Basic .NET from C# in Blazor Server Project)</h3>
+
+@if (logs == null)
+{
+    <p>Loading...</p>
+}
+
+else
+{
+    <table class='table'>
+        <thead>
+            <tr>
+                <th>Event</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var log in logs)
+            {
+                <tr>
+                    <td>@log.Action</td>
+                    <td>@log.Time</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    List<Activity> logs = new List<Activity>();
+    protected override void OnInitialized()
+    {
+        logs.Add(new Activity { Action = "Connection Established", Time = 1706932754 });
+        logs.Add(new Activity { Action = "Updated Thermostat Settings", Time = 1706932762 });
+        logs.Add(new Activity { Action = "Air Handler Turned On", Time = 1706932773 });
+        logs.Add(new Activity { Action = "Furnace Started Up", Time = 1706932785 });
+    }
+}

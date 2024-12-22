@@ -1,0 +1,17 @@
+﻿@using FSharp
+@page "/fsharp"
+@using System.Runtime.InteropServices
+@rendermode InteractiveServer
+
+<PageTitle>FSharpTest</PageTitle>
+
+<h3>Calling F# from C# in Blazor Server Project</h3>
+
+<p>
+    Test:
+    @result
+</p>
+
+@code {
+    int result = TestFromFSharp.Add(1, 2);
+}

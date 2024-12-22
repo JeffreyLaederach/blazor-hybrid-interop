@@ -1,0 +1,26 @@
+﻿@page "/"
+@inject IJSRuntime JSRuntime
+@rendermode InteractiveServer 
+
+<PageTitle>Home</PageTitle>
+
+<h1>Blazor Hybrid: Language Interop Tests</h1>
+
+This project is for demonstrating different language interoperability capabilities in ASP.NET Core Blazor Hybrid. 
+With Blazor Hybrid, you can take advantage of the benefits of client-side rendering using WebAssembly (WASM) as well as server-side rendering which can host native-compiled code.
+This allows for extensive flexibility in designating where your web application's components run and also what programming language you can utilize to accomplish different tasks as shown here.
+Languages Used: C#, HTML, CSS, JavaScript, TypeScript, C, Visual Basic .NET, F#
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        // Get a reference to our helpers.Logger class.
+        var jsObject = await this.JSRuntime.InvokeAsync<IJSObjectReference>("helpers.getLogger");
+
+        // Invoke the log method.
+        await jsObject.InvokeVoidAsync("log", $"LOG {DateTime.Now} - OnAfterRenderAsync called.");
+
+        // Clean Up.
+        await jsObject.DisposeAsync();
+    }
+}
